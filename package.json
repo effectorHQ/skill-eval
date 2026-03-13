@@ -1,0 +1,35 @@
+{
+  "name": "@effectorhq/skill-eval",
+  "version": "0.1.0",
+  "description": "Evaluation framework for AI agent skills — measure whether capabilities actually work",
+  "type": "module",
+  "bin": {
+    "skill-eval": "./scripts/run-eval.js"
+  },
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./scorer": "./src/scorer.js",
+    "./runner": "./src/runner.js"
+  },
+  "scripts": {
+    "eval": "node scripts/run-eval.js",
+    "eval:linear": "node scripts/run-eval.js ../linear-skill --static-only",
+    "test": "node --test src/*.test.js"
+  },
+  "keywords": [
+    "effector", "skill", "eval", "evaluation", "agent",
+    "capability", "quality", "testing", "openclaw", "clawhub"
+  ],
+  "author": "effectorHQ Contributors",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/effectorHQ/skill-eval"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

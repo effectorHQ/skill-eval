@@ -1,0 +1,80 @@
+# Evaluation spec for the linear-skill reference implementation.
+#
+# Static eval:   npx skill-eval ../linear-skill --static-only
+# Full eval:     npx skill-eval ../linear-skill --eval evals/linear.eval.yml
+#
+# This file defines expected behavior for functional testing.
+# v0.1.0 supports static analysis only; functional cases run in v0.2.0+.
+
+skill: linear
+version: ">=1.0.0"
+repository: https://github.com/effectorHQ/linear-skill
+
+# What the skill needs to run
+prerequisites:
+  env:
+    - LINEAR_API_KEY
+  bins:
+    - curl
+    - jq
+
+# Expected interface (checked against effector.toml)
+interface:
+  input: String
+  output: JSON
+  context:
+    - GenericAPIKey
+
+# Test cases for functional evaluation
+cases:
+  - name: list-open-issues
+    description: "Skill can list the user's open issues"
+    input: "What are my open Linear issues?"
+    expect:
+      output_type: JSON
+      contains_fields: ["id", "title", "state"]
+      no_error: true
+    timeout: 15
+
+  - name: search-issues
+    description: "Skill can search issues by keyword"
+    input: "Search Linear for issues about authentication"
+    expect:
+      output_type: JSON
+      contains_fields: ["id", "identifier", "title"]
+      no_error: true
+    timeout: 15
+
+  - name: get-cycle
+    description: "Skill can retrieve active sprint/cycle"
+    input: "Show me the current sprint for the ENG team"
+    expect:
+      output_type: JSON
+      no_error: true
+    timeout: 15
+
+  - name: invalid-api-key
+    description: "Skill handles bad credentials gracefully"
+    input: "List my issues"
+    env_override:
+      LINEAR_API_KEY: "lin_api_invalid_key_12345"
+    expect:
+      no_crash: true
+      error_message_contains: ["unauthorized", "401", "invalid", "error"]
+    timeout: 10
+
+  - name: empty-input
+    description: "Skill handles empty/vague input"
+    input: ""
+    expect:
+      no_crash: true
+    timeout: 10
+
+# Scoring weights for this eval
+scoring:
+  pass_threshold: 0.70
+  weights:
+    invocation_success: 0.40
+    output_type_match: 0.25
+    error_handling: 0.20
+    prerequisite_resolution: 0.15
