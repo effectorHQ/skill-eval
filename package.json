@@ -8,14 +8,12 @@
   },
   "main": "src/index.js",
   "exports": {
-    ".": "./src/index.js",
-    "./scorer": "./src/scorer.js",
-    "./runner": "./src/runner.js"
+    ".": "./src/index.js"
   },
   "scripts": {
     "eval": "node scripts/run-eval.js",
     "eval:linear": "node scripts/run-eval.js ../linear-skill --static-only",
-    "test": "node --test src/*.test.js"
+    "test": "node --test tests/*.test.js"
   },
   "keywords": [
     "effector", "skill", "eval", "evaluation", "agent",

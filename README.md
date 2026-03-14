@@ -2,7 +2,7 @@
 
 Evaluation framework for AI agent skills — measure whether capabilities actually work before they ship.
 
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+[![Status: Alpha](https://img.shields.io/badge/status-alpha-orange)](https://github.com/effectorHQ/REPO-TIERS.md) [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
 ---
 

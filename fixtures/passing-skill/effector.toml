@@ -1,0 +1,10 @@
+[effector]
+name = "linear"
+version = "1.0.0"
+type = "skill"
+description = "Manage Linear issues via GraphQL"
+
+[effector.interface]
+input = "String"
+output = "JSON"
+context = ["GenericAPIKey"]
