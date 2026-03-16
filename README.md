@@ -2,7 +2,7 @@
 
 Evaluation framework for AI agent skills — measure whether capabilities actually work before they ship.
 
-[![Status: Alpha](https://img.shields.io/badge/status-alpha-orange)](https://github.com/effectorHQ/REPO-TIERS.md) [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+[![npm](https://img.shields.io/npm/v/@effectorhq/skill-eval?color=E03E3E&logo=npm&logoColor=white)](https://www.npmjs.com/package/@effectorhq/skill-eval) [![CI](https://github.com/effectorHQ/skill-eval/actions/workflows/test.yml/badge.svg)](https://github.com/effectorHQ/skill-eval/actions/workflows/test.yml) [![Status: Alpha](https://img.shields.io/badge/status-alpha-orange)](https://github.com/effectorHQ/REPO-TIERS.md) [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
 ---
 
@@ -124,6 +124,20 @@ skill-eval/
 ├── package.json
 └── README.md
 ```
+
+## Install
+
+```bash
+npm install @effectorhq/skill-eval
+```
+
+You can also use the CLI directly without installing globally:
+
+```bash
+npx @effectorhq/skill-eval ./my-skill
+```
+
+See the published package on npm: **https://www.npmjs.com/package/@effectorhq/skill-eval**
 
 ## Usage
 
