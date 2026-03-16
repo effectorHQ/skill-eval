@@ -16,8 +16,8 @@
     "test": "node --test tests/*.test.js"
   },
   "keywords": [
-    "effector", "effectorhq", "skill", "eval", "evaluation", "agent",
-    "capability", "quality", "testing"
+    "ai-agent", "quality", "evaluation", "skill", "effector",
+    "metrics", "capability", "testing"
   ],
   "author": "effectorHQ Contributors",
   "license": "MIT",
@@ -32,6 +32,9 @@
   "engines": {
     "node": ">=18"
   },
+  "files": [
+    "src/"
+  ],
   "dependencies": {
     "@effectorhq/core": "file:../effector-core"
   },
