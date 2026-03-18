@@ -74,13 +74,13 @@ See the published package on npm: **https://www.npmjs.com/package/@effectorhq/sk
 
 ```bash
 # Evaluate a single skill (static-only — no execution)
-npx skill-eval ./path/to/skill --static-only
+npx @effectorhq/skill-eval ./path/to/skill --static-only
 
 # Evaluate all skills in a directory
-npx skill-eval ./skills/ --static-only --report markdown > report.md
+npx @effectorhq/skill-eval ./skills/ --static-only --report markdown > report.md
 
 # JSON output for CI
-npx skill-eval ./path/to/skill --format json
+npx @effectorhq/skill-eval ./path/to/skill --format json
 ```
 
 ### Output Example
