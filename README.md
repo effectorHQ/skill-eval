@@ -19,33 +19,23 @@ ClawHub has 13,729 skills. [67% of them fail in practice](https://github.com/eff
 
 ## What It Measures
 
-### Structural Quality (static, no execution)
+### Structural Quality (static-only)
 
-| Metric | What it checks | Weight |
-|--------|---------------|--------|
-| `frontmatter_completeness` | All required YAML fields present and valid | 0.15 |
-| `section_coverage` | Purpose, When to Use, When NOT to Use, Setup, Commands, Examples, Notes | 0.15 |
-| `type_declaration` | Has `effector.toml` with `[effector.interface]` input/output/context | 0.10 |
-| `permission_alignment` | Declared permissions match detected behavior (via `effector-audit`) | 0.10 |
-| `description_quality` | Length, specificity, starts with verb, avoids vague language | 0.05 |
-| `install_completeness` | At least one install method with all required fields | 0.05 |
+当前版本只做**静态质量评估**（不执行技能，不需要 sandbox）。主要指标来自 `src/static-analyzer.js`：
 
-### Functional Quality (requires execution sandbox)
+| Metric | What it checks |
+|--------|----------------|
+| `frontmatter_completeness` | YAML frontmatter 是否完整（name/description 等） |
+| `section_coverage` | 是否覆盖核心章节（Purpose/When to Use/When NOT to Use/Setup/Commands/Examples/Notes） |
+| `type_declaration` | 是否存在 `effector.toml` 且声明了 `[effector.interface]` |
+| `description_quality` | 描述长度/基本可读性启发式 |
+| `interface_completeness` | interface 字段的完整度（input/output/context 等） |
+| `example_quality` | Examples 是否包含可用的代码块/示例 |
+| `composability` | 是否使用标准类型（来自类型目录）以提升可组合性 |
 
-| Metric | What it checks | Weight |
-|--------|---------------|--------|
-| `prerequisite_resolution` | All declared `requires.bins` and `requires.env` resolve | 0.10 |
-| `invocation_success` | Skill produces parseable output for a reference input | 0.15 |
-| `output_type_match` | Actual output matches declared output type shape | 0.10 |
-| `error_handling` | Graceful behavior on invalid input (no crash, clear message) | 0.05 |
+### Score & Grade
 
-### Composite Score
-
-```
-score = Σ(metric_score × weight)
-```
-
-Scale: 0.0 (broken) → 1.0 (production-ready). Thresholds:
+Scale: 0.0 (broken) → 1.0 (production-ready). Current thresholds:
 
 | Grade | Range | Meaning |
 |-------|-------|---------|
@@ -55,74 +45,15 @@ Scale: 0.0 (broken) → 1.0 (production-ready). Thresholds:
 | D | 0.25–0.49 | Fundamentally broken |
 | F | 0.00–0.24 | Non-functional |
 
-## Eval File Format
-
-Evals are YAML files describing expected behavior:
-
-```yaml
-# evals/linear.eval.yml
-skill: linear
-version: ">=1.0.0"
-
-prerequisites:
-  env:
-    - LINEAR_API_KEY
-  bins:
-    - curl
-    - jq
-
-cases:
-  - name: list-open-issues
-    input: "What are my open Linear issues?"
-    expect:
-      output_type: JSON
-      contains_fields: ["id", "title", "state"]
-      no_error: true
-
-  - name: create-issue
-    input: "Create a Linear issue titled 'Test from skill-eval'"
-    expect:
-      output_type: JSON
-      contains_fields: ["id", "identifier"]
-      no_error: true
-    teardown: "Delete the created issue"
-
-  - name: invalid-key
-    input: "List my issues"
-    env_override:
-      LINEAR_API_KEY: "invalid_key"
-    expect:
-      no_crash: true
-      error_message_contains: ["unauthorized", "401", "invalid"]
-
-scoring:
-  pass_threshold: 0.70
-  weights:
-    invocation_success: 0.4
-    output_type_match: 0.3
-    error_handling: 0.2
-    prerequisite_resolution: 0.1
-```
-
-## Directory Structure
+## Directory Structure (current)
 
 ```
 skill-eval/
 ├── src/
-│   ├── runner.js          # Eval execution engine
-│   ├── scorer.js          # Metric computation + grading
-│   ├── reporter.js        # Output formatting (terminal, JSON, markdown)
-│   └── static-analyzer.js # Structural quality checks (no execution)
-├── evals/
-│   ├── linear.eval.yml    # Reference eval for linear-skill
-│   └── README.md          # How to write evals
-├── fixtures/
-│   ├── passing-skill/     # A skill that scores A
-│   └── failing-skill/     # A skill that scores F (for testing the framework)
-├── scripts/
-│   └── run-eval.js        # CLI entry point
-├── package.json
-└── README.md
+│   ├── index.js           # exports analyzeStatic
+│   └── static-analyzer.js # structural checks (no execution)
+└── scripts/
+    └── run-eval.js        # CLI entry point (static-only in v0.1.x)
 ```
 
 ## Install
@@ -142,11 +73,8 @@ See the published package on npm: **https://www.npmjs.com/package/@effectorhq/sk
 ## Usage
 
 ```bash
-# Evaluate a single skill (structural only — no execution)
+# Evaluate a single skill (static-only — no execution)
 npx skill-eval ./path/to/skill --static-only
-
-# Evaluate with execution (requires sandbox + prerequisites)
-npx skill-eval ./path/to/skill --eval evals/linear.eval.yml
 
 # Evaluate all skills in a directory
 npx skill-eval ./skills/ --static-only --report markdown > report.md
@@ -160,19 +88,14 @@ npx skill-eval ./path/to/skill --format json
 ```
 skill-eval v0.1.0 — linear-skill
 
-Structural Quality
-  ✓ frontmatter_completeness    1.00  (all fields present)
-  ✓ section_coverage            1.00  (7/7 sections)
-  ✓ type_declaration            1.00  (effector.toml with typed interface)
-  ✓ permission_alignment        1.00  (no drift detected)
-  ✓ description_quality         0.90  (good length, specific)
-  ✓ install_completeness        1.00  (manual install with steps)
-
-Functional Quality
-  ✓ prerequisite_resolution     1.00  (curl, jq found; LINEAR_API_KEY set)
-  ✓ invocation_success          1.00  (3/3 cases passed)
-  ✓ output_type_match           1.00  (JSON output matches declaration)
-  ✓ error_handling              0.80  (graceful on invalid key, no crash)
+Structural Quality (static-only)
+  ✓ frontmatter_completeness    1.00
+  ✓ section_coverage            1.00
+  ✓ type_declaration            1.00
+  ✓ description_quality         0.90
+  ✓ interface_completeness      1.00
+  ✓ example_quality             0.80
+  ✓ composability               0.90
 
 ──────────────────────────────────
 Score: 0.97 / 1.00  →  Grade A
@@ -182,14 +105,14 @@ Score: 0.97 / 1.00  →  Grade A
 ## Integration with effectorHQ
 
 - **`skill-lint`** checks syntax and structure → `skill-eval` checks behavior and quality
-- **`effector-audit`** checks permission drift → `skill-eval` uses that as one metric
-- **`effector-types`** defines the type vocabulary → `skill-eval` checks output against declared types
+- **`effector-audit`** can check permission drift → planned integration (not yet in v0.1.x)
+- **`effector-types`** defines the type vocabulary → `skill-eval` uses the type catalog for composability checks
 - **`clawhub-analysis`** provides corpus baselines → `skill-eval` grades against ecosystem norms
 
 ## Roadmap
 
-- [ ] `v0.1.0` — Static analyzer + reference eval for `linear-skill`
-- [ ] `v0.2.0` — Execution sandbox (Docker-based) + functional metrics
+- [x] `v0.1.x` — Static analyzer (no execution)
+- [ ] `v0.2.0` — Execution sandbox (Docker-based) + functional metrics + eval file format
 - [ ] `v0.3.0` — CI integration (`skill-eval-action` for GitHub Actions)
 - [ ] `v0.4.0` — Batch mode for ClawHub-wide audits
 - [ ] `v1.0.0` — Stable API, published to npm as `@effectorhq/skill-eval`
@@ -198,7 +121,6 @@ Score: 0.97 / 1.00  →  Grade A
 
 - [mgechev/skill-eval](https://github.com/mgechev/skill-eval) — Skill evaluation methodology
 - [Anthropic Claude Code Skills](https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/skills) — Skill authoring + evaluation patterns
-- [OpenClaw SKILL.md spec](https://github.com/openclaw/openclaw) — The skill format this evaluates
 - [effectorHQ/clawhub-analysis](https://github.com/effectorHQ/clawhub-analysis) — Empirical data backing this framework
 
 ---
