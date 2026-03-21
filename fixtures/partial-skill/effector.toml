@@ -1,0 +1,9 @@
+[effector]
+name    = "partial-example"
+version = "0.2.0"
+type    = "skill"
+description = "An example skill with a declared interface but thin runtime documentation"
+
+[effector.interface]
+input  = "CodeDiff"
+output = "Markdown"
