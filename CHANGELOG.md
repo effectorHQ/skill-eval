@@ -18,7 +18,7 @@ First release. Published as `@effectorhq/skill-eval`.
   - `description_quality` — description length and informativeness
   - `interface_completeness` — context types, nondeterminism, idempotent flags declared
   - `example_quality` — examples section has structured input/output pairs
-  - `composability` — types are standard Effector types (from the 36-type catalog)
+  - `composability` — types are standard Effector types (from the 40-type catalog)
 - **Score + Grade system** — weighted score 0.0–1.0 mapped to A (≥0.85) through F (<0.25)
 - **CLI** — `npx @effectorhq/skill-eval <dir> [--static-only] [--format json]`
 - Zero dependencies — Node.js built-ins only
