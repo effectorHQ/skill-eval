@@ -21,17 +21,17 @@ ClawHub has 13,729 skills. [67% of them fail in practice](https://github.com/eff
 
 ### Structural Quality (static-only)
 
-当前版本只做**静态质量评估**（不执行技能，不需要 sandbox）。主要指标来自 `src/static-analyzer.js`：
+The current release performs **static quality assessment only** (it does not execute skills and does not require a sandbox). Metrics are implemented in `src/static-analyzer.js`:
 
 | Metric | What it checks |
 |--------|----------------|
-| `frontmatter_completeness` | YAML frontmatter 是否完整（name/description 等） |
-| `section_coverage` | 是否覆盖核心章节（Purpose/When to Use/When NOT to Use/Setup/Commands/Examples/Notes） |
-| `type_declaration` | 是否存在 `effector.toml` 且声明了 `[effector.interface]` |
-| `description_quality` | 描述长度/基本可读性启发式 |
-| `interface_completeness` | interface 字段的完整度（input/output/context 等） |
-| `example_quality` | Examples 是否包含可用的代码块/示例 |
-| `composability` | 是否使用标准类型（来自类型目录）以提升可组合性 |
+| `frontmatter_completeness` | Whether YAML frontmatter is complete (e.g. name/description) |
+| `section_coverage` | Whether core sections are present (Purpose/When to Use/When NOT to Use/Setup/Commands/Examples/Notes) |
+| `type_declaration` | Whether `effector.toml` exists and declares `[effector.interface]` |
+| `description_quality` | Heuristic for description length and basic readability |
+| `interface_completeness` | Completeness of interface fields (input/output/context, etc.) |
+| `example_quality` | Whether Examples include usable code blocks or samples |
+| `composability` | Whether standard types from the type catalog are used to improve composability |
 
 ### Score & Grade
 
