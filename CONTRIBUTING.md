@@ -19,4 +19,4 @@ npm test
 
 ## License
 
-Apache 2.0 — see [LICENSE](./LICENSE).
+Licensed under the [Apache License, Version 2.0](./LICENSE.md).

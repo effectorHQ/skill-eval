@@ -2,7 +2,7 @@
 
 Evaluation framework for AI agent skills — measure whether capabilities actually work before they ship.
 
-[![npm](https://img.shields.io/npm/v/@effectorhq/skill-eval?color=E03E3E&logo=npm&logoColor=white)](https://www.npmjs.com/package/@effectorhq/skill-eval) [![CI](https://github.com/effectorHQ/skill-eval/actions/workflows/test.yml/badge.svg)](https://github.com/effectorHQ/skill-eval/actions/workflows/test.yml) [![Status: Alpha](https://img.shields.io/badge/status-alpha-orange)](https://github.com/effectorHQ/REPO-TIERS.md) [![License: Apache 2.0](https://img.shields.io/badge/license-Apache-2.0-blue.svg)](./LICENSE)
+[![npm](https://img.shields.io/npm/v/@effectorhq/skill-eval?color=E03E3E&logo=npm&logoColor=white)](https://www.npmjs.com/package/@effectorhq/skill-eval) [![CI](https://github.com/effectorHQ/skill-eval/actions/workflows/test.yml/badge.svg)](https://github.com/effectorHQ/skill-eval/actions/workflows/test.yml) [![Status: Alpha](https://img.shields.io/badge/status-alpha-orange)](https://github.com/effectorHQ/REPO-TIERS.md)
 
 ---
 
@@ -123,10 +123,6 @@ Score: 0.97 / 1.00  →  Grade A
 - [Anthropic Claude Code Skills](https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/skills) — Skill authoring + evaluation patterns
 - [effectorHQ/clawhub-analysis](https://github.com/effectorHQ/clawhub-analysis) — Empirical data backing this framework
 
----
-
-Apache License 2.0 — effectorHQ Contributors
-
 ## License
 
-This project is currently licensed under the Apache 2.0 License 。
+This project is currently licensed under the [Apache License, Version 2.0](LICENSE.md) 。

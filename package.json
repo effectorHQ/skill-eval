@@ -1,7 +1,7 @@
 {
   "name": "@effectorhq/skill-eval",
   "version": "0.1.0",
-  "description": "Evaluation framework for AI agent skills — measure whether capabilities actually work",
+  "description": "Evaluation framework for AI agent skills \u2014 measure whether capabilities actually work",
   "type": "module",
   "bin": {
     "skill-eval": "./scripts/run-eval.js"
@@ -43,7 +43,7 @@
     "src/",
     "scripts/",
     "README.md",
-    "LICENSE"
+    "LICENSE.md"
   ],
   "dependencies": {
     "@effectorhq/core": "^1.0.0"
