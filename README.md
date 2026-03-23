@@ -2,7 +2,7 @@
 
 Evaluation framework for AI agent skills — measure whether capabilities actually work before they ship.
 
-[![npm](https://img.shields.io/npm/v/@effectorhq/skill-eval?color=E03E3E&logo=npm&logoColor=white)](https://www.npmjs.com/package/@effectorhq/skill-eval) [![CI](https://github.com/effectorHQ/skill-eval/actions/workflows/test.yml/badge.svg)](https://github.com/effectorHQ/skill-eval/actions/workflows/test.yml) [![Status: Alpha](https://img.shields.io/badge/status-alpha-orange)](https://github.com/effectorHQ/REPO-TIERS.md) [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+[![npm](https://img.shields.io/npm/v/@effectorhq/skill-eval?color=E03E3E&logo=npm&logoColor=white)](https://www.npmjs.com/package/@effectorhq/skill-eval) [![CI](https://github.com/effectorHQ/skill-eval/actions/workflows/test.yml/badge.svg)](https://github.com/effectorHQ/skill-eval/actions/workflows/test.yml) [![Status: Alpha](https://img.shields.io/badge/status-alpha-orange)](https://github.com/effectorHQ/REPO-TIERS.md) [![License: Apache 2.0](https://img.shields.io/badge/license-Apache-2.0-blue.svg)](./LICENSE)
 
 ---
 
@@ -125,4 +125,8 @@ Score: 0.97 / 1.00  →  Grade A
 
 ---
 
-MIT License — effectorHQ Contributors
+Apache License 2.0 — effectorHQ Contributors
+
+## License
+
+This project is currently licensed under the Apache 2.0 License 。

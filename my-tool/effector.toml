@@ -1,0 +1,12 @@
+[effector]
+name = "my-tool"
+version = "1.0.0"
+type = "skill"
+description = "A typed AI agent tool"
+
+[effector.interface]
+
+[effector.permissions]
+network = false
+filesystem = { read = true, write = true }
+env-read = ["*"]

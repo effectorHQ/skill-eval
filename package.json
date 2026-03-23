@@ -17,11 +17,17 @@
     "prepublishOnly": "node --test tests/*.test.js"
   },
   "keywords": [
-    "ai-agent", "quality", "evaluation", "skill", "effector",
-    "metrics", "capability", "testing"
+    "ai-agent",
+    "quality",
+    "evaluation",
+    "skill",
+    "effector",
+    "metrics",
+    "capability",
+    "testing"
   ],
   "author": "effectorHQ Contributors",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/effectorHQ/skill-eval.git"
